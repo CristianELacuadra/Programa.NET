@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoADatos", "CapaDatos\AccesoADatos.csproj", "{79748049-DDAC-46AC-8DB1-0F9AA3C29333}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Acceso a Datos", "Acceso a Datos", "{43E8873F-38A0-46B1-8C69-679747A44E92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba", "Prueba\Prueba.csproj", "{CA5CFD06-0F5D-4412-9942-14CBA5996098}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79748049-DDAC-46AC-8DB1-0F9AA3C29333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79748049-DDAC-46AC-8DB1-0F9AA3C29333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79748049-DDAC-46AC-8DB1-0F9AA3C29333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79748049-DDAC-46AC-8DB1-0F9AA3C29333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5CFD06-0F5D-4412-9942-14CBA5996098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5CFD06-0F5D-4412-9942-14CBA5996098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5CFD06-0F5D-4412-9942-14CBA5996098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5CFD06-0F5D-4412-9942-14CBA5996098}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79748049-DDAC-46AC-8DB1-0F9AA3C29333} = {43E8873F-38A0-46B1-8C69-679747A44E92}
+	EndGlobalSection
+EndGlobal

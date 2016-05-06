@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModeloDatos.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ModeloDatosStoreContainer">
+    <EntitySet Name="Gerente" EntityType="ModeloDatos.Store.Gerente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Proyecto" EntityType="ModeloDatos.Store.Proyecto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Factor" EntityType="ModeloDatos.Store.Factor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Valor" EntityType="ModeloDatos.Store.Valor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ponderacion" EntityType="ModeloDatos.Store.Ponderacion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Altera" EntityType="ModeloDatos.Store.Altera" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Caracteriza" EntityType="ModeloDatos.Store.Caracteriza" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Registra" Association="ModeloDatos.Store.Registra">
+      <End Role="Gerente" EntitySet="Gerente" />
+      <End Role="Proyecto" EntitySet="Proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Altera_Gerente" Association="ModeloDatos.Store.FK_Altera_Gerente">
+      <End Role="Gerente" EntitySet="Gerente" />
+      <End Role="Altera" EntitySet="Altera" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Altera_Factor" Association="ModeloDatos.Store.FK_Altera_Factor">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Altera" EntitySet="Altera" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caracteriza_Proyecto" Association="ModeloDatos.Store.FK_Caracteriza_Proyecto">
+      <End Role="Proyecto" EntitySet="Proyecto" />
+      <End Role="Caracteriza" EntitySet="Caracteriza" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caracteriza_Factor" Association="ModeloDatos.Store.FK_Caracteriza_Factor">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Caracteriza" EntitySet="Caracteriza" />
+    </AssociationSet>
+    <AssociationSet Name="Asigna" Association="ModeloDatos.Store.Asigna">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Ponderacion" EntitySet="Ponderacion" />
+    </AssociationSet>
+    <AssociationSet Name="Tiene" Association="ModeloDatos.Store.Tiene">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Valor" EntitySet="Valor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Gerente">
+    <Key>
+      <PropertyRef Name="DNI" />
+    </Key>
+    <Property Name="DNI" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proyecto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="GerenteID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Factor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ponderacion_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Valor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Denominacion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumValor" Type="smallint" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FactorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ponderacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Peso" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Altera">
+    <Key>
+      <PropertyRef Name="Gerente_DNI" />
+      <PropertyRef Name="Factor_ID" />
+    </Key>
+    <Property Name="Gerente_DNI" Type="int" Nullable="false" />
+    <Property Name="Factor_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Caracteriza">
+    <Key>
+      <PropertyRef Name="Proyecto_ID" />
+      <PropertyRef Name="Factor_ID" />
+    </Key>
+    <Property Name="Proyecto_ID" Type="int" Nullable="false" />
+    <Property Name="Factor_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Registra">
+    <End Role="Gerente" Type="ModeloDatos.Store.Gerente" Multiplicity="1" />
+    <End Role="Proyecto" Type="ModeloDatos.Store.Proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gerente">
+        <PropertyRef Name="DNI" />
+      </Principal>
+      <Dependent Role="Proyecto">
+        <PropertyRef Name="GerenteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Asigna">
+    <End Role="Factor" Type="ModeloDatos.Store.Factor" Multiplicity="*" />
+    <End Role="Ponderacion" Type="ModeloDatos.Store.Ponderacion" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Ponderacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Factor">
+        <PropertyRef Name="Ponderacion_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Tiene">
+    <End Role="Factor" Type="ModeloDatos.Store.Factor" Multiplicity="1" />
+    <End Role="Valor" Type="ModeloDatos.Store.Valor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Valor">
+        <PropertyRef Name="FactorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Altera_Gerente">
+    <End Role="Gerente" Type="ModeloDatos.Store.Gerente" Multiplicity="1" />
+    <End Role="Altera" Type="ModeloDatos.Store.Altera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gerente">
+        <PropertyRef Name="DNI" />
+      </Principal>
+      <Dependent Role="Altera">
+        <PropertyRef Name="Gerente_DNI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Altera_Factor">
+    <End Role="Altera" Type="ModeloDatos.Store.Altera" Multiplicity="*" />
+    <End Role="Factor" Type="ModeloDatos.Store.Factor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Altera">
+        <PropertyRef Name="Factor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caracteriza_Proyecto">
+    <End Role="Proyecto" Type="ModeloDatos.Store.Proyecto" Multiplicity="1" />
+    <End Role="Caracteriza" Type="ModeloDatos.Store.Caracteriza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Caracteriza">
+        <PropertyRef Name="Proyecto_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caracteriza_Factor">
+    <End Role="Caracteriza" Type="ModeloDatos.Store.Caracteriza" Multiplicity="*" />
+    <End Role="Factor" Type="ModeloDatos.Store.Factor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Caracteriza">
+        <PropertyRef Name="Factor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModeloDatos" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
+        <EntityContainer Name="ModeloDatosContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gerente" EntityType="ModeloDatos.Gerente" />
+          <EntitySet Name="Proyecto" EntityType="ModeloDatos.Proyecto" />
+          <EntitySet Name="Factor" EntityType="ModeloDatos.Factor" />
+          <EntitySet Name="Valor" EntityType="ModeloDatos.Valor" />
+          <EntitySet Name="Ponderacion" EntityType="ModeloDatos.Ponderacion" />
+          <AssociationSet Name="Registra" Association="ModeloDatos.Registra">
+            <End Role="Gerente" EntitySet="Gerente" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="Altera" Association="ModeloDatos.Altera">
+            <End Role="Gerente" EntitySet="Gerente" />
+            <End Role="Factor" EntitySet="Factor" />
+          </AssociationSet>
+          <AssociationSet Name="Caracteriza" Association="ModeloDatos.Caracteriza">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="Factor" EntitySet="Factor" />
+          </AssociationSet>
+          <AssociationSet Name="Asigna" Association="ModeloDatos.Asigna">
+            <End Role="Factor" EntitySet="Factor" />
+            <End Role="Ponderacion" EntitySet="Ponderacion" />
+          </AssociationSet>
+          <AssociationSet Name="Tiene" Association="ModeloDatos.Tiene">
+            <End Role="Factor" EntitySet="Factor" />
+            <End Role="Valor" EntitySet="Valor" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Gerente" >
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Apellido" Type="String" Nullable="false" />
+          <NavigationProperty Name="Proyecto" Relationship="ModeloDatos.Registra" FromRole="Gerente" ToRole="Proyecto" />
+          <NavigationProperty Name="Factor" Relationship="ModeloDatos.Altera" FromRole="Gerente" ToRole="Factor" />
+        </EntityType>
+        <EntityType Name="Proyecto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Descripcion" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Gerente" Relationship="ModeloDatos.Registra" FromRole="Proyecto" ToRole="Gerente" />
+          <Property Name="GerenteID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Factor" Relationship="ModeloDatos.Caracteriza" FromRole="Proyecto" ToRole="Factor" />
+        </EntityType>
+        <EntityType Name="Factor" >
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Gerente" Relationship="ModeloDatos.Altera" FromRole="Factor" ToRole="Gerente" />
+          <NavigationProperty Name="Proyecto" Relationship="ModeloDatos.Caracteriza" FromRole="Factor" ToRole="Proyecto" />
+          <NavigationProperty Name="Ponderacion" Relationship="ModeloDatos.Asigna" FromRole="Factor" ToRole="Ponderacion" />
+          <NavigationProperty Name="Valor" Relationship="ModeloDatos.Tiene" FromRole="Factor" ToRole="Valor" />
+        </EntityType>
+        <EntityType Name="Valor" >
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="NumValor" Type="Int16" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Factor" Relationship="ModeloDatos.Tiene" FromRole="Valor" ToRole="Factor" />
+          <Property Name="FactorID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ponderacion" >
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Peso" Type="String" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Factor" Relationship="ModeloDatos.Asigna" FromRole="Ponderacion" ToRole="Factor" />
+        </EntityType>
+        <Association Name="Registra">
+          <End Type="ModeloDatos.Gerente" Role="Gerente" Multiplicity="1" />
+          <End Type="ModeloDatos.Proyecto" Role="Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gerente">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="Proyecto">
+              <PropertyRef Name="GerenteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Altera">
+          <End Type="ModeloDatos.Gerente" Role="Gerente" Multiplicity="*" />
+          <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="*" />
+        </Association>
+        <Association Name="Caracteriza">
+          <End Type="ModeloDatos.Proyecto" Role="Proyecto" Multiplicity="*" />
+          <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="*" />
+        </Association>
+        <Association Name="Asigna">
+          <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="1" />
+          <End Type="ModeloDatos.Ponderacion" Role="Ponderacion" Multiplicity="1" />
+        </Association>
+        <Association Name="Tiene">
+          <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="1" />
+          <End Type="ModeloDatos.Valor" Role="Valor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Valor">
+              <PropertyRef Name="FactorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModeloDatosStoreContainer" CdmEntityContainer="ModeloDatosContainer">
+    <EntitySetMapping Name="Gerente">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Gerente)">
+        <MappingFragment StoreEntitySet="Gerente">
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proyecto">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Proyecto)">
+        <MappingFragment StoreEntitySet="Proyecto">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="GerenteID" ColumnName="GerenteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factor">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Factor)">
+        <MappingFragment StoreEntitySet="Factor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Valor">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Valor)">
+        <MappingFragment StoreEntitySet="Valor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+          <ScalarProperty Name="NumValor" ColumnName="NumValor" />
+          <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ponderacion">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Ponderacion)">
+        <MappingFragment StoreEntitySet="Ponderacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Altera" TypeName="ModeloDatos.Altera" StoreEntitySet="Altera">
+      <EndProperty Name="Gerente">
+        <ScalarProperty Name="DNI" ColumnName="Gerente_DNI" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="Factor_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Caracteriza" TypeName="ModeloDatos.Caracteriza" StoreEntitySet="Caracteriza">
+      <EndProperty Name="Proyecto">
+        <ScalarProperty Name="ID" ColumnName="Proyecto_ID" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="Factor_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Asigna" TypeName="ModeloDatos.Asigna" StoreEntitySet="Factor">
+      <EndProperty Name="Ponderacion">
+        <ScalarProperty Name="ID" ColumnName="Ponderacion_ID" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

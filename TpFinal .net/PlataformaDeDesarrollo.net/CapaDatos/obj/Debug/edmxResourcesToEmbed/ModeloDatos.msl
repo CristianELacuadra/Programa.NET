@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModeloDatosStoreContainer" CdmEntityContainer="ModeloDatosContainer">
+    <EntitySetMapping Name="Gerente">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Gerente)">
+        <MappingFragment StoreEntitySet="Gerente">
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proyecto">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Proyecto)">
+        <MappingFragment StoreEntitySet="Proyecto">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="GerenteID" ColumnName="GerenteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factor">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Factor)">
+        <MappingFragment StoreEntitySet="Factor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Valor">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Valor)">
+        <MappingFragment StoreEntitySet="Valor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+          <ScalarProperty Name="NumValor" ColumnName="NumValor" />
+          <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ponderacion">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDatos.Ponderacion)">
+        <MappingFragment StoreEntitySet="Ponderacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Altera" TypeName="ModeloDatos.Altera" StoreEntitySet="Altera">
+      <EndProperty Name="Gerente">
+        <ScalarProperty Name="DNI" ColumnName="Gerente_DNI" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="Factor_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Caracteriza" TypeName="ModeloDatos.Caracteriza" StoreEntitySet="Caracteriza">
+      <EndProperty Name="Proyecto">
+        <ScalarProperty Name="ID" ColumnName="Proyecto_ID" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="Factor_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Asigna" TypeName="ModeloDatos.Asigna" StoreEntitySet="Factor">
+      <EndProperty Name="Ponderacion">
+        <ScalarProperty Name="ID" ColumnName="Ponderacion_ID" />
+      </EndProperty>
+      <EndProperty Name="Factor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

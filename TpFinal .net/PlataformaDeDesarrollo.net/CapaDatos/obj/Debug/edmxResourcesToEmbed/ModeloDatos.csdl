@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModeloDatos" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="ModeloDatosContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Gerente" EntityType="ModeloDatos.Gerente" />
+    <EntitySet Name="Proyecto" EntityType="ModeloDatos.Proyecto" />
+    <EntitySet Name="Factor" EntityType="ModeloDatos.Factor" />
+    <EntitySet Name="Valor" EntityType="ModeloDatos.Valor" />
+    <EntitySet Name="Ponderacion" EntityType="ModeloDatos.Ponderacion" />
+    <AssociationSet Name="Registra" Association="ModeloDatos.Registra">
+      <End Role="Gerente" EntitySet="Gerente" />
+      <End Role="Proyecto" EntitySet="Proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="Altera" Association="ModeloDatos.Altera">
+      <End Role="Gerente" EntitySet="Gerente" />
+      <End Role="Factor" EntitySet="Factor" />
+    </AssociationSet>
+    <AssociationSet Name="Caracteriza" Association="ModeloDatos.Caracteriza">
+      <End Role="Proyecto" EntitySet="Proyecto" />
+      <End Role="Factor" EntitySet="Factor" />
+    </AssociationSet>
+    <AssociationSet Name="Asigna" Association="ModeloDatos.Asigna">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Ponderacion" EntitySet="Ponderacion" />
+    </AssociationSet>
+    <AssociationSet Name="Tiene" Association="ModeloDatos.Tiene">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="Valor" EntitySet="Valor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Gerente">
+    <Key>
+      <PropertyRef Name="DNI" />
+    </Key>
+    <Property Name="DNI" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" />
+    <Property Name="Apellido" Type="String" Nullable="false" />
+    <NavigationProperty Name="Proyecto" Relationship="ModeloDatos.Registra" FromRole="Gerente" ToRole="Proyecto" />
+    <NavigationProperty Name="Factor" Relationship="ModeloDatos.Altera" FromRole="Gerente" ToRole="Factor" />
+  </EntityType>
+  <EntityType Name="Proyecto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" />
+    <Property Name="Descripcion" Type="String" Nullable="true" MaxLength="Max" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Gerente" Relationship="ModeloDatos.Registra" FromRole="Proyecto" ToRole="Gerente" />
+    <Property Name="GerenteID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Factor" Relationship="ModeloDatos.Caracteriza" FromRole="Proyecto" ToRole="Factor" />
+  </EntityType>
+  <EntityType Name="Factor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <NavigationProperty Name="Gerente" Relationship="ModeloDatos.Altera" FromRole="Factor" ToRole="Gerente" />
+    <NavigationProperty Name="Proyecto" Relationship="ModeloDatos.Caracteriza" FromRole="Factor" ToRole="Proyecto" />
+    <NavigationProperty Name="Ponderacion" Relationship="ModeloDatos.Asigna" FromRole="Factor" ToRole="Ponderacion" />
+    <NavigationProperty Name="Valor" Relationship="ModeloDatos.Tiene" FromRole="Factor" ToRole="Valor" />
+  </EntityType>
+  <EntityType Name="Valor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="Max" />
+    <Property Name="NumValor" Type="Int16" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Factor" Relationship="ModeloDatos.Tiene" FromRole="Valor" ToRole="Factor" />
+    <Property Name="FactorID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ponderacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Peso" Type="String" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Factor" Relationship="ModeloDatos.Asigna" FromRole="Ponderacion" ToRole="Factor" />
+  </EntityType>
+  <Association Name="Registra">
+    <End Type="ModeloDatos.Gerente" Role="Gerente" Multiplicity="1" />
+    <End Type="ModeloDatos.Proyecto" Role="Proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gerente">
+        <PropertyRef Name="DNI" />
+      </Principal>
+      <Dependent Role="Proyecto">
+        <PropertyRef Name="GerenteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Altera">
+    <End Type="ModeloDatos.Gerente" Role="Gerente" Multiplicity="*" />
+    <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="*" />
+  </Association>
+  <Association Name="Caracteriza">
+    <End Type="ModeloDatos.Proyecto" Role="Proyecto" Multiplicity="*" />
+    <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="*" />
+  </Association>
+  <Association Name="Asigna">
+    <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="1" />
+    <End Type="ModeloDatos.Ponderacion" Role="Ponderacion" Multiplicity="1" />
+  </Association>
+  <Association Name="Tiene">
+    <End Type="ModeloDatos.Factor" Role="Factor" Multiplicity="1" />
+    <End Type="ModeloDatos.Valor" Role="Valor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Valor">
+        <PropertyRef Name="FactorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

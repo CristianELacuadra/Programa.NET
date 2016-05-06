@@ -1,0 +1,9 @@
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\Prueba.exe
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\Prueba.pdb
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\obj\Debug\Prueba.exe
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\obj\Debug\Prueba.pdb
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\Prueba.exe.config
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\CapaDatos.dll
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\EntityFramework.dll
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\CapaDatos.pdb
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\Prueba\bin\Debug\EntityFramework.xml

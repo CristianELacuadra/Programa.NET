@@ -1,0 +1,7 @@
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\bin\Debug\CapaDatos.dll.config
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\bin\Debug\CapaDatos.dll
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\bin\Debug\CapaDatos.pdb
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\bin\Debug\EntityFramework.dll
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\bin\Debug\EntityFramework.xml
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\obj\Debug\CapaDatos.dll
+D:\Documents\facultad\optativa plataforma de desarrolo.net\Trabajo Practico\TpFinal .net\PlataformaDeDesarrollo.net\CapaDatos\obj\Debug\CapaDatos.pdb
